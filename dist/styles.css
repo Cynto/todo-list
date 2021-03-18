@@ -1,0 +1,72 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: rgb(78, 82, 81);
+}
+body {
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+    
+    background: rgb(194, 196, 195);
+    
+    border-bottom:1px solid grey;
+
+}
+header h1 {
+    font-size: 40px;
+}
+nav {
+    background: rgb(221, 223, 222);
+    width: 240px;
+    height: 100vh;
+    
+    border-right: 1px solid grey;
+}
+.dates-container {
+    height: 30%;
+    border-bottom: 1px solid grey;
+}
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    
+}
+.projects-container h2{
+    font-size: 30px;
+    margin-left: 30px;
+    margin-bottom: 30px;
+}
+.projects-container div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 15px;
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+}
+.projects-container div:hover {
+    background: rgb(190, 190, 190);
+    cursor: pointer;
+}
+.projects-container i {
+    margin-left: 15px;
+}
+.projects-container a {
+    font-size: 20px;
+    margin-left: 10px;
+    width: 100%;
+    cursor: pointer;
+    
+    
+}
+.projects-container a:hover {
+    background: rgb(190, 190, 190);
+}
