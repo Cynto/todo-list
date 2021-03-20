@@ -43,7 +43,7 @@ nav {
     margin-left: 30px;
     margin-bottom: 30px;
 }
-.projects-container div {
+.project-div {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -51,8 +51,9 @@ nav {
     width: 80%;
     height: 40px;
     border-radius: 5px;
+    margin-top: 10px;
 }
-.projects-container div:hover {
+.project-div:hover {
     background: rgb(190, 190, 190);
     cursor: pointer;
 }
@@ -69,4 +70,24 @@ nav {
 }
 .projects-container a:hover {
     background: rgb(190, 190, 190);
+}
+
+.projects-container input {
+    margin-top: 20px;
+    width: 60%;
+    height: 30px;
+    border: 0.01px solid grey;
+    margin-left: 30px;
+    
+}
+.projects-container input:focus {
+    outline: none;
+}
+.projects-container button {
+    
+    width: 45%;
+    height: 100%;
+    font-size: 30px;
+    cursor: pointer;
+    
 }

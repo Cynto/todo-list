@@ -1,7 +1,7 @@
 class Project {
-    constructor(title, priority = 'low') {
+    constructor(title) {
         this.title = title;
-        this.priority = priority;
+        
     }
 }
 export default Project;
