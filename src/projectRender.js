@@ -17,6 +17,7 @@ const addProject = (() => {
     
     let projectsArray = [];
     projectsArray.push(defaultProject)
+    
 
     addProjectButton.addEventListener('click', () => {
         const input = document.createElement('input');
@@ -69,11 +70,13 @@ const addProject = (() => {
         })
     })
 
-
+    return{projectsArray, addProjectButton}
 })()
 const projectRenderer = (() => {
+    let projectDivArray = [];
+    const projectsContainer = basicDom.projectsContainer;
     const renderNames = (projectsArray) => {
-        const projectsContainer = basicDom.projectsContainer;
+        
 
         while(projectsContainer.hasChildNodes()) {
             
@@ -83,13 +86,31 @@ const projectRenderer = (() => {
         const title = document.createElement('h2');
         title.textContent = 'Projects';
         projectsContainer.appendChild(title);
-    
+        
         for(let i = 0; i < projectsArray.length; i++) {
             
 
             const projectDiv = document.createElement('div');
             projectDiv.classList.add('project-div'); 
             projectsContainer.appendChild(projectDiv);
+
+            projectDivArray.push(projectDiv);
+            for(let i = 0; i < projectDivArray.length; i++) {
+                projectDivArray[i].addEventListener('click', () => {
+                    for(let i = 0; i < projectDivArray.length; i++) {
+                        projectDivArray[i].classList.remove('selected')
+                    }
+                    basicDom.today.classList.remove('selected');
+                    basicDom.week.classList.remove('selected')
+                    projectDivArray[i].classList.add('selected')
+                })
+            }
+            for(let i = 0; i < projectDivArray.length; i++) {
+                projectDivArray[i].addEventListener('click', () => { 
+                    
+                    
+                })
+            }
 
             const icon = document.createElement('i');
             icon.classList.add('fas', 'fa-list')
@@ -101,6 +122,12 @@ const projectRenderer = (() => {
 
         }
     }
-    return {renderNames}
+    const renderPage = (name, array) => {
+        console.log(name)
+    }
+    
+    renderNames(addProject.projectsArray)
+    projectsContainer.appendChild(addProject.addProjectButton)
+    return {renderNames, projectDivArray}
 })()
 export {projectRenderer, addProject}

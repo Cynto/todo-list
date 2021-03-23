@@ -1,4 +1,4 @@
-class List{
+class Item{
     constructor(title, description, dueDate, priority, complete = false){
         this.title = title;
         this.description = description;
@@ -7,4 +7,4 @@ class List{
         this.complete = complete;
     }
 }
-export default List;
+export default Item;
