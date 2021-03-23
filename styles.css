@@ -25,13 +25,40 @@ header h1 {
 nav {
     background: rgb(221, 223, 222);
     width: 240px;
-    height: 100vh;
+    min-height: 92.6vh;
+    
     
     border-right: 1px solid grey;
 }
 .dates-container {
-    height: 30%;
+    height: 18%;
     border-bottom: 1px solid grey;
+    display: flex;
+    flex-direction: column;
+}
+.date-div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 15px;
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.date-div:hover {
+    background: rgb(190, 190, 190);
+    cursor: pointer;
+}
+.date-div a {
+    font-size: 20px;
+    margin-left: 10px;
+    width: 100%;
+    cursor: pointer;
+    
+}
+.date-div i {
+    margin-left: 15px;
 }
 .projects-container {
     display: flex;
@@ -89,5 +116,48 @@ nav {
     height: 100%;
     font-size: 30px;
     cursor: pointer;
+    
+}
+.selected {
+    background: rgb(190, 190, 190);
+    font-weight: bolder;
+}
+.total-container {
+    display: flex;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 76%;
+    min-height: 92.6vh;
+    
+}
+.add-item-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    font-size: 20px;
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.add-item-button:hover {
+    background: rgb(190, 190, 190);
+}
+
+.item-input {
+    width: 80%;
+    height: 30px;
+    width: 60%;
+    height: 30px;
+    border: 0.01px solid grey;
+    margin-top: 30px;
+}
+.item-input:focus {
+    outline: none;
     
 }
