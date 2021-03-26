@@ -1,6 +1,7 @@
 import Project from './projectClass'
 import basicDom from './basicDom'
-
+import dateRenderer from './dateRender'
+import itemAdder from './ItemAdder'
 
 
 
@@ -92,6 +93,7 @@ const projectRenderer = (() => {
 
             const projectDiv = document.createElement('div');
             projectDiv.classList.add('project-div'); 
+            projectDiv.id = projectsArray[i].title.toLowerCase();
             projectsContainer.appendChild(projectDiv);
 
             projectDivArray.push(projectDiv);
@@ -103,15 +105,9 @@ const projectRenderer = (() => {
                     basicDom.today.classList.remove('selected');
                     basicDom.week.classList.remove('selected')
                     projectDivArray[i].classList.add('selected')
+                    renderPage();
                 })
             }
-            for(let i = 0; i < projectDivArray.length; i++) {
-                projectDivArray[i].addEventListener('click', () => { 
-                    
-                    
-                })
-            }
-
             const icon = document.createElement('i');
             icon.classList.add('fas', 'fa-list')
             projectDiv.appendChild(icon);
@@ -122,12 +118,66 @@ const projectRenderer = (() => {
 
         }
     }
-    const renderPage = (name, array) => {
-        console.log(name)
+    const renderPage = () => {
+        const currentProject = document.getElementsByClassName('selected');
+        const dateProjectArray = dateRenderer.dateProjectArray;
+        const projectsArray = addProject.projectsArray;
+
+        let itemArray = [];
+        let title = '';
+
+        for(let i = 0; i < dateProjectArray.length; i++) {
+            if(dateProjectArray[i].title === currentProject[0].id){
+                console.log(dateProjectArray)
+                itemArray = dateProjectArray[i].array;
+                title = dateProjectArray[i].title;
+            }
+        }
+        for(let i = 0; i < projectsArray.length; i++) {
+            if(projectsArray[i].title.toLowerCase() === currentProject[0].id) {
+                console.log(projectsArray)
+                itemArray = projectsArray[i].array;
+                title = projectsArray[i].title;
+            }
+        }
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+
+        const mainContainer = basicDom.mainContainer;
+        //render items
+
+        while(mainContainer.hasChildNodes()) {
+            
+            mainContainer.removeChild(mainContainer.firstChild);
+        }
+        const titleh2 = document.createElement('h2');
+        titleh2.textContent = title;
+        titleh2.classList.add('title')
+        mainContainer.appendChild(titleh2);
+
+        for(let i = 0; i < itemArray.length; i++) {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('item-div')
+            
+            const circleIcon = document.createElement('i');
+            circleIcon.classList.add('far', 'fa-circle');
+            itemDiv.appendChild(circleIcon)
+            
+            const itemTitle = document.createElement('h3');
+            itemTitle.textContent = itemArray[i].title;
+            itemDiv.appendChild(itemTitle);
+            mainContainer.appendChild(itemDiv);
+
+            
+
+
+        }
+        const addItemButton = itemAdder.addItemButton;
+        mainContainer.appendChild(addItemButton)
+
     }
     
     renderNames(addProject.projectsArray)
     projectsContainer.appendChild(addProject.addProjectButton)
-    return {renderNames, projectDivArray}
+    return {renderNames, renderPage, projectDivArray}
 })()
 export {projectRenderer, addProject}

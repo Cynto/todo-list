@@ -161,3 +161,36 @@ nav {
     outline: none;
     
 }
+.main-container button{
+    cursor: pointer;
+    width: 70px;
+    height: 50px;
+    font-size: 30px;
+}
+.item-div {
+    display: flex;
+    align-items: center;
+    width: 600px;
+    border-radius: 5px;
+    height: 40px;
+
+}
+.item-div:nth-child(1) {
+    margin-top: 30px;
+}
+.item-div:hover {
+    background: rgb(190, 190, 190);
+}
+.item-div i {
+    margin-right: 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.item-div h3 {
+    font-weight:300;
+}
+.title {
+    font-size: 40px;
+    border-bottom: 1px solid grey;
+    margin-top: 30px;
+}

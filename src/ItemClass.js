@@ -1,5 +1,5 @@
 class Item{
-    constructor(title, description, dueDate, priority, complete = false){
+    constructor(title, description = '', date = new Date(), dueDate = date.getDate(), priority = 'Low', complete = false){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
