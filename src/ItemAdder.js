@@ -2,7 +2,8 @@ import basicDom from './basicDom'
 import {addProject, projectRenderer} from './projectRender'
 import Item from './ItemClass'
 import dateRenderer from './dateRender'
-
+import add from 'date-fns/add'
+import {format} from 'date-fns';
 
 const itemAdder = (() => {
     const mainContainer = basicDom.mainContainer;
@@ -41,7 +42,14 @@ const itemAdder = (() => {
 
             for(let i = 0; i < dateProjectArray.length; i++) {
                 if(dateProjectArray[i].title === currentProject[0].id){
-                    dateProjectArray[i].array.push(item);
+                    if(dateProjectArray[i].title === 'thisweek') {
+                        const weekItem = new Item(inputValue, '', format(add(new Date(), {days: 7}), 'P'));
+                        dateProjectArray[i].array.push(weekItem);
+                    }
+                    else {
+                        dateProjectArray[i].array.push(item);
+                    }
+                    console.log(dateProjectArray[i].array)
                     
                 }
             }

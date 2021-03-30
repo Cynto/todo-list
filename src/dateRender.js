@@ -6,7 +6,7 @@ const dateRenderer = (() => {
     const week = basicDom.week;
 
     const todayProject = new Project('today');
-    const weekProject = new Project('this week');
+    const weekProject = new Project('thisweek');
 
     let dateProjectArray = []
     dateProjectArray.push(todayProject, weekProject);

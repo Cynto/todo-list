@@ -2,7 +2,7 @@ import Project from './projectClass'
 import basicDom from './basicDom'
 import dateRenderer from './dateRender'
 import itemAdder from './ItemAdder'
-
+import {format} from 'date-fns';
 
 
 const addProject = (() => {
@@ -150,24 +150,80 @@ const projectRenderer = (() => {
             mainContainer.removeChild(mainContainer.firstChild);
         }
         const titleh2 = document.createElement('h2');
+        if(title === 'Thisweek') {
+            title = 'This Week'
+        }
         titleh2.textContent = title;
         titleh2.classList.add('title')
         mainContainer.appendChild(titleh2);
 
         for(let i = 0; i < itemArray.length; i++) {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('item-div')
-            
-            const circleIcon = document.createElement('i');
-            circleIcon.classList.add('far', 'fa-circle');
-            itemDiv.appendChild(circleIcon)
-            
-            const itemTitle = document.createElement('h3');
-            itemTitle.textContent = itemArray[i].title;
-            itemDiv.appendChild(itemTitle);
-            mainContainer.appendChild(itemDiv);
+            if(itemArray[i].complete === false) {
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('item-div')
+                
+                const titleContainer = document.createElement('div');
+                titleContainer.classList.add('title-container');
+                itemDiv.appendChild(titleContainer);
 
-            
+                const circleIcon = document.createElement('i');
+                circleIcon.classList.add('far', 'fa-circle');
+                titleContainer.appendChild(circleIcon)
+
+                circleIcon.addEventListener('click', () => {
+                    itemArray[i].complete = true;
+                    renderPage();
+                })
+                
+                const itemTitle = document.createElement('h3');
+                itemTitle.textContent = itemArray[i].title;
+                titleContainer.appendChild(itemTitle);
+                mainContainer.appendChild(itemDiv);
+
+                itemTitle.addEventListener('click', () => {
+                    const newTitleInput = document.createElement('input');
+                    newTitleInput.type = 'text';
+                    newTitleInput.value = itemArray[i].title;
+                    titleContainer.appendChild(newTitleInput)
+                    titleContainer.removeChild(itemTitle);
+
+                    newTitleInput.addEventListener('keypress', (e) => {
+                        console.log(e.key)
+                        if(e.key === 'Enter') {
+                            itemArray[i].title = newTitleInput.value;
+                            titleContainer.removeChild(newTitleInput);
+                            itemTitle.textContent = itemArray[i].title;
+                            titleContainer.appendChild(itemTitle)
+                        }
+                    })
+                })
+
+                const dateContainer = document.createElement('div');
+                dateContainer.classList.add('date-container')
+                itemDiv.appendChild(dateContainer)
+
+                const dueDate = document.createElement('h3');
+                dueDate.textContent = itemArray[i].dueDate;
+                dueDate.classList.add('date')
+                dateContainer.appendChild(dueDate)
+
+                dueDate.addEventListener('click', () => {
+                    dateContainer.removeChild(dueDate)
+
+                    const dueDateInput = document.createElement('input');
+                    dueDateInput.type = 'date';
+
+                    dateContainer.appendChild(dueDateInput)
+
+                    dueDateInput.addEventListener('change', () => {
+                        itemArray[i].dueDate = format(new Date(dueDateInput.value), 'P')
+                        dueDate.textContent = itemArray[i].dueDate;
+                        dateContainer.removeChild(dueDateInput);
+                        dateContainer.appendChild(dueDate)
+                    })
+                })
+
+            }
 
 
         }

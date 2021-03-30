@@ -1,5 +1,6 @@
+import {format} from 'date-fns';
 class Item{
-    constructor(title, description = '', date = new Date(), dueDate = date.getDate(), priority = 'Low', complete = false){
+    constructor(title, description = '', dueDate = format(new Date(), 'P'),  priority = 'Low', complete = false){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
