@@ -3,6 +3,8 @@ import basicDom from './basicDom'
 import dateRenderer from './dateRender'
 import itemAdder from './ItemAdder'
 import {format} from 'date-fns';
+import localStorageAdder from './localStorage'
+import projectDeleter from './deleteProject'
 
 
 const addProject = (() => {
@@ -18,6 +20,11 @@ const addProject = (() => {
     
     let projectsArray = [];
     projectsArray.push(defaultProject)
+
+    const setProjectsArray = (array) => {
+        projectsArray = array;
+        return projectsArray;
+    }
     
 
     addProjectButton.addEventListener('click', () => {
@@ -50,8 +57,8 @@ const addProject = (() => {
                 projectsContainer.removeChild(input)
 
                 projectRenderer.renderNames(projectsArray);
-                console.log(projectsArray)
-                
+               
+                console.log(localStorageAdder.projectsAdder(projectsArray))
                 
                 projectsContainer.appendChild(addProjectButton)
             }
@@ -71,7 +78,7 @@ const addProject = (() => {
         })
     })
 
-    return{projectsArray, addProjectButton}
+    return{projectsArray, addProjectButton, projectsContainer, setProjectsArray}
 })()
 const projectRenderer = (() => {
     let projectDivArray = [];
@@ -114,7 +121,20 @@ const projectRenderer = (() => {
 
             const projectLink = document.createElement('a');
             projectLink.textContent = projectsArray[i].title;
-            projectDiv.appendChild(projectLink)
+            projectDiv.appendChild(projectLink);
+
+            const deleteButton = document.createElement('h3');
+            deleteButton.textContent = '×'
+            if(projectsArray[i].title != 'Default') {
+                projectDiv.appendChild(deleteButton)
+            }
+
+            deleteButton.addEventListener('click', () => {
+                const arrayItem = projectsArray[i];
+                projectDeleter(arrayItem, projectsArray)
+            });
+
+            projectsContainer.appendChild(addProject.addProjectButton)
 
         }
     }
@@ -212,7 +232,7 @@ const projectRenderer = (() => {
 
                     const dueDateInput = document.createElement('input');
                     dueDateInput.type = 'date';
-
+                    dueDateInput.min = format(new Date(), 'y-MM-d')
                     dateContainer.appendChild(dueDateInput)
 
                     dueDateInput.addEventListener('change', () => {

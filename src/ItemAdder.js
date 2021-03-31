@@ -4,7 +4,7 @@ import Item from './ItemClass'
 import dateRenderer from './dateRender'
 import add from 'date-fns/add'
 import {format} from 'date-fns';
-
+import localStorageAdder from './localStorage'
 const itemAdder = (() => {
     const mainContainer = basicDom.mainContainer;
     
@@ -59,7 +59,8 @@ const itemAdder = (() => {
                     console.log(projectsArray[i].array)
                 }
             }
-            
+            localStorageAdder.projectsAdder(projectsArray);
+
             mainContainer.removeChild(buttonContainer);
             mainContainer.removeChild(input);
             mainContainer.appendChild(addItemButton)
