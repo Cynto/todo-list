@@ -148,15 +148,15 @@ const projectRenderer = (() => {
 
         for(let i = 0; i < dateProjectArray.length; i++) {
             if(dateProjectArray[i].title === currentProject[0].id){
-                console.log(dateProjectArray)
-                itemArray = dateProjectArray[i].array;
+                
+                itemArray = dateProjectArray[i];
                 title = dateProjectArray[i].title;
             }
         }
         for(let i = 0; i < projectsArray.length; i++) {
             if(projectsArray[i].title.toLowerCase() === currentProject[0].id) {
-                console.log(projectsArray)
-                itemArray = projectsArray[i].array;
+                
+                itemArray = projectsArray[i];
                 title = projectsArray[i].title;
             }
         }
@@ -177,8 +177,8 @@ const projectRenderer = (() => {
         titleh2.classList.add('title')
         mainContainer.appendChild(titleh2);
 
-        for(let i = 0; i < itemArray.length; i++) {
-            if(itemArray[i].complete === false) {
+        for(let i = 0; i < itemArray.array.length; i++) {
+            if(itemArray.array[i].complete === false) {
                 const itemDiv = document.createElement('div');
                 itemDiv.classList.add('item-div')
                 
@@ -191,29 +191,41 @@ const projectRenderer = (() => {
                 titleContainer.appendChild(circleIcon)
 
                 circleIcon.addEventListener('click', () => {
-                    itemArray[i].complete = true;
+                    itemArray.array[i].complete = true;
+                    const found = projectsArray.find(item => item.dataProject === itemArray.dataProject);
+                    if(found != undefined) {
+                        const indexOf = projectsArray.indexOf(found)
+                        projectsArray[indexOf] = itemArray;
+                        localStorageAdder.projectsAdder(projectsArray);
+                    }
+                    else {
+                        const indexOf = dateProjectArray.indexOf(found)
+                        dateProjectArray[indexOf] = itemArray;
+                        localStorageAdder.datesAdder(dateProjectArray)
+                    }
                     renderPage();
                 })
                 
                 const itemTitle = document.createElement('h3');
-                itemTitle.textContent = itemArray[i].title;
+                itemTitle.textContent = itemArray.array[i].title;
                 titleContainer.appendChild(itemTitle);
                 mainContainer.appendChild(itemDiv);
 
                 itemTitle.addEventListener('click', () => {
                     const newTitleInput = document.createElement('input');
                     newTitleInput.type = 'text';
-                    newTitleInput.value = itemArray[i].title;
+                    newTitleInput.value = itemArray.array[i].title;
                     titleContainer.appendChild(newTitleInput)
                     titleContainer.removeChild(itemTitle);
 
                     newTitleInput.addEventListener('keypress', (e) => {
-                        console.log(e.key)
+                        
                         if(e.key === 'Enter') {
-                            itemArray[i].title = newTitleInput.value;
+                            itemArray.array[i].title = newTitleInput.value;
                             titleContainer.removeChild(newTitleInput);
                             itemTitle.textContent = itemArray[i].title;
                             titleContainer.appendChild(itemTitle)
+                            localStorageAdder.projectsAdder()
                         }
                     })
                 })
@@ -223,7 +235,7 @@ const projectRenderer = (() => {
                 itemDiv.appendChild(dateContainer)
 
                 const dueDate = document.createElement('h3');
-                dueDate.textContent = itemArray[i].dueDate;
+                dueDate.textContent = itemArray.array[i].dueDate;
                 dueDate.classList.add('date')
                 dateContainer.appendChild(dueDate)
 
@@ -236,10 +248,22 @@ const projectRenderer = (() => {
                     dateContainer.appendChild(dueDateInput)
 
                     dueDateInput.addEventListener('change', () => {
-                        itemArray[i].dueDate = format(new Date(dueDateInput.value), 'P')
-                        dueDate.textContent = itemArray[i].dueDate;
+                        itemArray.array[i].dueDate = format(new Date(dueDateInput.value), 'P')
+                        dueDate.textContent = itemArray.array[i].dueDate;
                         dateContainer.removeChild(dueDateInput);
                         dateContainer.appendChild(dueDate)
+                        
+                        const found = projectsArray.find(item => item.dataProject === itemArray.dataProject);
+                        if(found != undefined) {
+                            const indexOf = projectsArray.indexOf(found)
+                            projectsArray[indexOf] = itemArray;
+                            localStorageAdder.projectsAdder(projectsArray);
+                        }
+                        else {
+                            const indexOf = dateProjectArray.indexOf(found)
+                            dateProjectArray[indexOf] = itemArray;
+                            localStorageAdder.datesAdder(dateProjectArray)
+                        }
                     })
                 })
 

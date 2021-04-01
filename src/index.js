@@ -9,3 +9,4 @@ import localStorageRetriever from './localStorageRetrieve'
 import projectDeleter from './deleteProject'
 
 projectRenderer.renderPage()
+console.log(localStorage)

@@ -8,12 +8,13 @@ const localStorageAdder = (() => {
         
         localStorage.setItem('projectsArray', JSON.stringify([projectsArray]));
         console.log(localStorage)
-        
-        
-        
-
     }
-    return {projectsAdder}
+    const datesAdder = (dateProjectArray) => {
+
+        localStorage.setItem('dateProjectArray', JSON.stringify([dateProjectArray]));
+        console.log(localStorageAdder)
+    }
+    return {projectsAdder, datesAdder}
 })()
 
 export default localStorageAdder;

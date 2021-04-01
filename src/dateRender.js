@@ -1,6 +1,7 @@
 import basicDom from './basicDom'
 import {projectRenderer} from './projectRender'
 import Project from './projectClass'
+
 const dateRenderer = (() => {
     const today = basicDom.today;
     const week = basicDom.week;
@@ -10,6 +11,19 @@ const dateRenderer = (() => {
 
     let dateProjectArray = []
     dateProjectArray.push(todayProject, weekProject);
+
+    const setDateProjectArray = (array) => {
+        dateProjectArray = array;
+        
+        return dateProjectArray
+    }
+
+    const getLocalDateArray = (() => {
+        dateProjectArray = JSON.parse(localStorage.getItem('dateProjectArray'));
+        dateProjectArray = dateProjectArray[0];
+
+        
+    })()
 
     let dateDivArray = []
     let projectDivArray = projectRenderer.projectDivArray;
@@ -32,7 +46,7 @@ const dateRenderer = (() => {
         
     }
     
-    return {dateProjectArray}
+    return {dateProjectArray, setDateProjectArray}
 
 })()
 export default dateRenderer;
