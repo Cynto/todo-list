@@ -145,21 +145,24 @@ const projectRenderer = (() => {
 
         let itemArray = [];
         let title = '';
-
-        for(let i = 0; i < dateProjectArray.length; i++) {
-            if(dateProjectArray[i].title === currentProject[0].id){
-                
-                itemArray = dateProjectArray[i];
-                title = dateProjectArray[i].title;
+        if(dateProjectArray != null) {
+            for(let i = 0; i < dateProjectArray.length; i++) {
+                if(dateProjectArray[i].title === currentProject[0].id){
+                    
+                    itemArray = dateProjectArray[i];
+                    title = dateProjectArray[i].title;
+                }
             }
         }
+        
         for(let i = 0; i < projectsArray.length; i++) {
             if(projectsArray[i].title.toLowerCase() === currentProject[0].id) {
-                
+                    
                 itemArray = projectsArray[i];
                 title = projectsArray[i].title;
             }
         }
+       
         title = title.charAt(0).toUpperCase() + title.slice(1);
 
         const mainContainer = basicDom.mainContainer;
@@ -176,7 +179,7 @@ const projectRenderer = (() => {
         titleh2.textContent = title;
         titleh2.classList.add('title')
         mainContainer.appendChild(titleh2);
-
+        console.log(dateProjectArray)
         for(let i = 0; i < itemArray.array.length; i++) {
             if(itemArray.array[i].complete === false) {
                 const itemDiv = document.createElement('div');

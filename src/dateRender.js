@@ -19,10 +19,12 @@ const dateRenderer = (() => {
     }
 
     const getLocalDateArray = (() => {
+        if(localStorage.length > 0) {
         dateProjectArray = JSON.parse(localStorage.getItem('dateProjectArray'));
         dateProjectArray = dateProjectArray[0];
-
         
+
+    }
     })()
 
     let dateDivArray = []
