@@ -212,3 +212,43 @@ nav {
 input:focus {
     outline: none;
 }
+.menu-bars {
+  display: none;
+}
+.nav-bars {
+  border: none;
+  background: none;
+  display: none;
+}
+
+.clicked {
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+  .menu-bars {
+    display: flex;
+    border: none;
+    position: relative;
+    margin-top: 10px;
+    margin-left: 10px;
+    
+  }
+  .menu-bars:focus {
+    outline: none;
+  }
+  .menu-bars i {
+    font-size: 30px;
+    
+  }
+  nav .fa-bars {
+    font-size: 30px;
+  }
+
+  .item-div {
+    width: 250px;
+  }
+  .nav-off {
+    display: none;
+  }
+
+}
