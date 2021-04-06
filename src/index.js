@@ -7,5 +7,6 @@ import itemAdder from './ItemAdder';
 import localStorageAdder from './localStorage';
 import localStorageRetriever from './localStorageRetrieve';
 import projectDeleter from './deleteProject';
+import navBarToggler from './navBarMobile'
 
 projectRenderer.renderPage();
